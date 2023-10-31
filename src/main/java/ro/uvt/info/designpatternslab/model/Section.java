@@ -1,17 +1,19 @@
 package ro.uvt.info.designpatternslab.model;
+import java.util.ArrayList;
 
 import lombok.Data;
 
+import lombok.Data;
 @Data
-public class Paragraph implements Element{
-    private String text;
+public class Section implements Element{
+    private String something;
 
-    public Paragraph(String text) {
-        this.text = text;
+    public Section(String something) {
+        this.something = something;
     }
 
     public void print() {
-        System.out.println("Text: " + text);
+        System.out.println("Something: " + something);
     }
 
     @Override
