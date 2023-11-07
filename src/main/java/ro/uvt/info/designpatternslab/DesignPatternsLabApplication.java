@@ -3,13 +3,12 @@ package ro.uvt.info.designpatternslab;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ro.uvt.info.designpatternslab.model.*;
 
-
 @SpringBootApplication
 public class DesignPatternsLabApplication {
 
     public static void main(String[] args) throws Exception {
         //SpringApplication.run(SpLabApplication.class, args);
-        Section cap1 = new Section("Capitolul 1");
+        Section cap1 = new Section("Chapter 1");
         Paragraph p1 = new Paragraph("Paragraph 1");
         cap1.add(p1);
         Paragraph p2 = new Paragraph("Paragraph 2");
