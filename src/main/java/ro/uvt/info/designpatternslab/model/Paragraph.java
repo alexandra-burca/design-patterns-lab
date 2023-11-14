@@ -1,6 +1,7 @@
 package ro.uvt.info.designpatternslab.model;
 
 import lombok.Data;
+import ro.uvt.info.designpatternslab.services.AlignStrategy;
 
 @Data
 public class Paragraph implements Element{

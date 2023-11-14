@@ -1,11 +1,19 @@
-package ro.uvt.info.designpatternslab.difexemple;
+package ro.uvt.info.designpatternslab;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+import ro.uvt.info.designpatternslab.difexemple.ClientComponent;
+import ro.uvt.info.designpatternslab.difexemple.SingletonComponent;
+import ro.uvt.info.designpatternslab.difexemple.TransientComponent;
+
 
 
 @SpringBootApplication
+
+
 public class MySpringApplication {
     public static void main(String[] args) {
 //

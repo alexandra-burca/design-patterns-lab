@@ -2,6 +2,9 @@ package ro.uvt.info.designpatternslab;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ro.uvt.info.designpatternslab.model.*;
+import ro.uvt.info.designpatternslab.services.AlignCenter;
+import ro.uvt.info.designpatternslab.services.AlignLeft;
+import ro.uvt.info.designpatternslab.services.AlignRight;
 
 @SpringBootApplication
 public class DesignPatternsLabApplication {

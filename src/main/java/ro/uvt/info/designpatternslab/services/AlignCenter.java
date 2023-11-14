@@ -1,6 +1,10 @@
-package ro.uvt.info.designpatternslab.model;
+package ro.uvt.info.designpatternslab.services;
 
-public class AlignCenter implements AlignStrategy{
+import ro.uvt.info.designpatternslab.model.Context;
+import ro.uvt.info.designpatternslab.model.Paragraph;
+import ro.uvt.info.designpatternslab.services.AlignStrategy;
+
+public class AlignCenter implements AlignStrategy {
     @Override
     public void render(Paragraph paragraph, Context context) {
         String text = paragraph.getText();
