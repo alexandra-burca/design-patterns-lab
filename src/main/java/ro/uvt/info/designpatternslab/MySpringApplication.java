@@ -9,10 +9,7 @@ import ro.uvt.info.designpatternslab.difexemple.ClientComponent;
 import ro.uvt.info.designpatternslab.difexemple.SingletonComponent;
 import ro.uvt.info.designpatternslab.difexemple.TransientComponent;
 
-
-
 @SpringBootApplication
-
 
 public class MySpringApplication {
     public static void main(String[] args) {

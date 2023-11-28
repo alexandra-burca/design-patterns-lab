@@ -1,5 +1,7 @@
 package ro.uvt.info.designpatternslab.model;
 
+import ro.uvt.info.designpatternslab.services.Visitor;
+
 public class ImageProxy implements Element, Picture{
     String url;
     private Image realImage;
@@ -28,6 +30,11 @@ public class ImageProxy implements Element, Picture{
     @Override
     public Element get(int id) {
         return null;
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitImageProxy(this);
     }
 
     @Override

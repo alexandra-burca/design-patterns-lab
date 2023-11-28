@@ -1,33 +1,43 @@
 package ro.uvt.info.designpatternslab.model;
 import java.util.ArrayList;
 
-import lombok.Data;
+import ro.uvt.info.designpatternslab.services.Visitor;
 
-import lombok.Data;
-@Data
+import java.util.ArrayList;
+
 public class Section implements Element{
-    private String something;
+    private String title;
+    private ArrayList<Element> elements=new ArrayList<>();
 
-    public Section(String something) {
-        this.something = something;
+    public Section(String title) {
+        this.title = title;
     }
 
+    @Override
     public void print() {
-        System.out.println("Something: " + something);
+        System.out.println("Section: " + title);
+        for (Element element : elements) {
+            element.print();
+        }
     }
 
     @Override
     public void add(Element element) {
-
+        elements.add(element);
     }
 
     @Override
     public void remove(Element element) {
-
+        elements.remove(element);
     }
 
     @Override
     public Element get(int id) {
-        return null;
+        return elements.get(id);
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitSection(this);
     }
 }

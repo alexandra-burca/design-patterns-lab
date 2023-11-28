@@ -2,6 +2,9 @@ package ro.uvt.info.designpatternslab.model;
 
 import lombok.Data;
 
+import lombok.Data;
+import ro.uvt.info.designpatternslab.services.Visitor;
+
 @Data
 public class Table implements Element{
     private String something;
@@ -27,5 +30,10 @@ public class Table implements Element{
     @Override
     public Element get(int id) {
         return null;
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitTable(this);
     }
 }

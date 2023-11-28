@@ -2,6 +2,7 @@ package ro.uvt.info.designpatternslab.model;
 
 import lombok.Data;
 import ro.uvt.info.designpatternslab.services.AlignStrategy;
+import ro.uvt.info.designpatternslab.services.Visitor;
 
 @Data
 public class Paragraph implements Element{
@@ -51,6 +52,11 @@ public class Paragraph implements Element{
     @Override
     public Element get(int id) {
         return null;
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitParagraph(this);
     }
 
 }

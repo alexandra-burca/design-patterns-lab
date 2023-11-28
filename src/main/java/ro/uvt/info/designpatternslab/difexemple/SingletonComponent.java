@@ -1,5 +1,7 @@
 package ro.uvt.info.designpatternslab.difexemple;
+
 import org.springframework.stereotype.Component;
+
 @Component
 public class SingletonComponent {
     public SingletonComponent() {

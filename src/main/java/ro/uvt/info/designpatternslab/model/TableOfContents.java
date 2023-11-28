@@ -3,6 +3,7 @@ package ro.uvt.info.designpatternslab.model;
 import lombok.Data;
 
 import java.util.ArrayList;
+import ro.uvt.info.designpatternslab.services.Visitor;
 
 public class TableOfContents implements Element{
     private String something;
@@ -25,5 +26,10 @@ public class TableOfContents implements Element{
     @Override
     public Element get(int id) {
         return null;
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitTableOfContents(this);
     }
 }
