@@ -1,17 +1,13 @@
 package ro.uvt.info.designpatternslab.model;
 
-import lombok.Data;
-import ro.uvt.info.designpatternslab.services.Visitor;
 
 import java.util.concurrent.TimeUnit;
 
-@Data
-public class Image implements Element, Picture{
-    private String imageName;
-
+public class Image implements TextElement, Picture, Visitee {
+    private String name;
 
     public Image(String name) {
-        imageName = name;
+        this.name = name;
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
@@ -19,32 +15,29 @@ public class Image implements Element, Picture{
         }
     }
 
-    public void print() {
-        System.out.println("Image with name: " + imageName);
+    public String getName() {
+        return name;
+    }
+
+    public void add(int index, TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
+    }
+
+    public TextElement get(int index) {
+        throw new UnsupportedOperationException("You cannot do that");
+    }
+
+    public void remove(TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
     @Override
-    public void add(Element element) {
-
-    }
-
-    @Override
-    public void remove(Element element) {
-
-    }
-
-    @Override
-    public Element get(int id) {
-        return null;
+    public String url() {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
     @Override
     public void accept(Visitor v) {
         v.visitImage(this);
-    }
-
-    @Override
-    public String url() {
-        return null;
     }
 }

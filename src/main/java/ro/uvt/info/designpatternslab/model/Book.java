@@ -1,23 +1,52 @@
 package ro.uvt.info.designpatternslab.model;
 
-import lombok.Data;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.util.ArrayList;
+import java.util.List;
 
+public class Book implements Visitee {
+    private String title;
+    private Long id;
+    private List<Author> authors = new ArrayList<>();
+    private List<TextElement> contents = new ArrayList<>();
 
-
-public class Book extends Section{
-    private ArrayList<Author> authors=new ArrayList<>();
+    @JsonCreator
     public Book(String title) {
-        super(title);
+        this.title = title;
     }
 
-    public void addAuthor(Author author){
+    public void addAuthor(Author author) {
         authors.add(author);
     }
 
-    public void addContent(Element element){
-        super.add(element);
+    public void addContent(TextElement content) {
+        contents.add(content);
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public List<TextElement> getContents() {
+        return contents;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitBook(this);
+    }
 }

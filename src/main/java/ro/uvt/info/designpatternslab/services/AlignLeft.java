@@ -1,23 +1,16 @@
 package ro.uvt.info.designpatternslab.services;
 
-import ro.uvt.info.designpatternslab.model.Context;
-import ro.uvt.info.designpatternslab.model.Paragraph;
-import ro.uvt.info.designpatternslab.services.AlignStrategy;
 
 public class AlignLeft implements AlignStrategy {
-
-    @Override
-    public void render(Paragraph paragraph, Context context) {
-        String text = paragraph.getText();
+    public String render(String text, int lineLength) {
         int length = text.length();
-
-        int pageWidth = context.getPageWidth();
-        int spacesNeeded = pageWidth - length;
-
-        System.out.print(text);
-        for (int i = 0; i < spacesNeeded; i++) {
-            System.out.print(" ");
+        StringBuilder result = new StringBuilder();
+        int start = 0;
+        while (start < length) {
+            int end = Math.min(start + lineLength, length);
+            result.append(text, start, end).append('\n');
+            start = end;
         }
-        System.out.println();
+        return result.toString();
     }
 }

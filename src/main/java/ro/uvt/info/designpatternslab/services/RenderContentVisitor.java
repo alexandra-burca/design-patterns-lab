@@ -1,42 +1,48 @@
 package ro.uvt.info.designpatternslab.services;
 
 
+import java.util.List;
 import ro.uvt.info.designpatternslab.model.*;
 
-public class RenderContentVisitor implements Visitor{
-
+public class RenderContentVisitor implements Visitor {
     @Override
-    public void visitBook(Book book) {
-        book.print();
+    public void visitParagraph(Paragraph p) {
+        String alignedText = p.getAlignStrategy().render("Paragraph: " + p.getText(), 60);
+        System.out.println(alignedText);
     }
 
     @Override
-    public void visitSection(Section section) {
-        section.print();
+    public void visitSection(Section s) {
+        System.out.println(s.getTitle());
+        List<TextElement> content = s.getContent();
+        for (TextElement element : content) {
+            if (element instanceof Paragraph){
+                System.out.println(((Paragraph) element).getAlignStrategy().render("Paragraph: " + ((Paragraph) element).getText(), 60));
+            }
+        }
     }
 
     @Override
-    public void visitTableOfContents(TableOfContents tableOfContents) {
-        tableOfContents.print();
+    public void visitImage(Image i) {
+        System.out.println("Image with name: " + i.getName());
     }
 
     @Override
-    public void visitParagraph(Paragraph paragraph) {
-        paragraph.print();
+    public void visitBook(Book b) {
+        System.out.println("Book: " + b.getTitle());
+        System.out.println("Authors:");
+        for (Author author : b.getAuthors()) {
+            author.print();
+        }
+        for (TextElement content : b.getContents()) {
+            if(content instanceof Table) {
+
+            }
+        }
     }
 
     @Override
-    public void visitImageProxy(ImageProxy imageProxy) {
-        imageProxy.print();
-    }
-
-    @Override
-    public void visitImage(Image image) {
-        image.print();
-    }
-
-    @Override
-    public void visitTable(Table table) {
-        table.print();
+    public void visitTable(Table t) {
+        System.out.println("Table: " + t.getTitle());
     }
 }

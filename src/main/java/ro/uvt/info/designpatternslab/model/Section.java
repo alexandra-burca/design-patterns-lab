@@ -1,43 +1,43 @@
 package ro.uvt.info.designpatternslab.model;
 import java.util.ArrayList;
 
-import ro.uvt.info.designpatternslab.services.Visitor;
-
 import java.util.ArrayList;
+import java.util.List;
 
-public class Section implements Element{
+public class Section implements TextElement, Visitee {
     private String title;
-    private ArrayList<Element> elements=new ArrayList<>();
+    private List<TextElement> content = new ArrayList<>();
 
     public Section(String title) {
         this.title = title;
     }
 
-    @Override
-    public void print() {
-        System.out.println("Section: " + title);
-        for (Element element : elements) {
-            element.print();
-        }
+    public int add(TextElement element) {
+        content.add(element);
+        return content.indexOf(element);
     }
 
-    @Override
-    public void add(Element element) {
-        elements.add(element);
+    public String getTitle(){
+        return title;
     }
 
-    @Override
-    public void remove(Element element) {
-        elements.remove(element);
+    public List<TextElement> getContent(){
+        return content;
     }
 
-    @Override
-    public Element get(int id) {
-        return elements.get(id);
+    public TextElement get(int index) {
+        return content.get(index);
+    }
+
+    public void remove(TextElement element) {
+        content.remove(element);
     }
 
     @Override
     public void accept(Visitor v) {
         v.visitSection(this);
+    }
+
+    public void print() {
     }
 }

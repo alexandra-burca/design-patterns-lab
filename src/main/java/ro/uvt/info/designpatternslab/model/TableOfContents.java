@@ -1,35 +1,20 @@
 package ro.uvt.info.designpatternslab.model;
 
-import lombok.Data;
 
 import java.util.ArrayList;
-import ro.uvt.info.designpatternslab.services.Visitor;
+import java.util.List;
+public class TableOfContents implements TextElement {
+    private List<TextElement> entries = new ArrayList<>();
 
-public class TableOfContents implements Element{
-    private String something;
-
-    @Override
-    public void print() {
-        System.out.println("Something: " + something);
+    public void add(int index, TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
-    @Override
-    public void add(Element element) {
-
+    public TextElement get(int index) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
-    @Override
-    public void remove(Element element) {
-
-    }
-
-    @Override
-    public Element get(int id) {
-        return null;
-    }
-
-    @Override
-    public void accept(Visitor v) {
-        v.visitTableOfContents(this);
+    public void remove(TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 }

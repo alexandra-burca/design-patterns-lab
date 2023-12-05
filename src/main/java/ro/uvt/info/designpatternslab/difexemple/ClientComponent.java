@@ -1,23 +1,32 @@
 package ro.uvt.info.designpatternslab.difexemple;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 @Component
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ClientComponent {
-    private final TransientComponent tc;
-    private final SingletonComponent sc;
+    private TransientComponent tc;
+    private SingletonComponent sc;
+    public ClientComponent() {
+        System.out.println("ClientComponent::ClientComponent = " + this);
+    }
+
+    @Autowired
+    public void setTransientComponent(TransientComponent tc) {
+        this.tc = tc;
+    }
+
+    @Autowired
+    public void setSingletonComponent(SingletonComponent sc) {
+        this.sc = sc;
+    }
 
     public void operation() {
         System.out.println("Invoked ClientComponent::operation() on " + this);
         System.out.println(" o SingletonComponent = " + sc);
         System.out.println(" o TransientComponent = " + tc);
     }
-
-    public String getClientMessage() {
-        return "Hello from ClientComponent = " + this;
-    }
-
 }
