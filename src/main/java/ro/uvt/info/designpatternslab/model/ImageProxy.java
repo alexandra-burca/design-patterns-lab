@@ -1,45 +1,30 @@
 package ro.uvt.info.designpatternslab.model;
 
-import ro.uvt.info.designpatternslab.services.Visitor;
-
-public class ImageProxy implements Element, Picture{
+public class ImageProxy implements TextElement, Picture{
     String url;
     private Image realImage;
 
     public ImageProxy(String url) {
         this.url = url;
-        this.realImage=null;
+        this.realImage = null;
     }
 
-    @Override
-    public void print() {
-        loadImage();
-        realImage.print();
+
+    public void add(int index, TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
-    @Override
-    public void add(Element element) {
-
+    public TextElement get(int id) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
-    @Override
-    public void remove(Element element) {
-
-    }
-
-    @Override
-    public Element get(int id) {
-        return null;
-    }
-
-    @Override
-    public void accept(Visitor v) {
-        v.visitImageProxy(this);
+    public void remove(TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
     @Override
     public String url() {
-        return null;
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
     Image loadImage(){

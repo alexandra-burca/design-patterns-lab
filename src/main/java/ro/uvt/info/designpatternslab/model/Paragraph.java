@@ -1,57 +1,15 @@
 package ro.uvt.info.designpatternslab.model;
 
-import lombok.Data;
-import ro.uvt.info.designpatternslab.services.AlignStrategy;
-import ro.uvt.info.designpatternslab.services.Visitor;
 
-@Data
-public class Paragraph implements Element{
+import ro.uvt.info.designpatternslab.services.*;
+
+public class Paragraph implements TextElement, Visitee {
     private String text;
-    private AlignStrategy textAlignment;
-
-    public Paragraph(String text, AlignStrategy textAlignment) {
-        this.text = text;
-        this.textAlignment=textAlignment;
-    }
+    private AlignStrategy alignStrategy;
 
     public Paragraph(String text) {
         this.text = text;
-    }
-
-    public Paragraph(AlignStrategy textAlignment) {
-        this.textAlignment = textAlignment;
-    }
-
-    public void render(Paragraph paragraph, Context context){
-        textAlignment.render(paragraph, context);
-    }
-
-    public void setAlignStrategy(AlignStrategy alignStrategy) {
-        this.textAlignment = alignStrategy;
-    }
-
-    public void print() {
-        System.out.println("Text: " + text);
-        if (textAlignment != null) {
-            textAlignment.render(this, new Context());
-        } else {
-            System.out.println(text);
-        }
-    }
-
-    @Override
-    public void add(Element element) {
-
-    }
-
-    @Override
-    public void remove(Element element) {
-
-    }
-
-    @Override
-    public Element get(int id) {
-        return null;
+        this.alignStrategy = new AlignLeft();
     }
 
     @Override
@@ -59,4 +17,27 @@ public class Paragraph implements Element{
         v.visitParagraph(this);
     }
 
+    public void setAlignStrategy(AlignStrategy strategy) {
+        this.alignStrategy = strategy;
+    }
+
+    public AlignStrategy getAlignStrategy(){
+        return alignStrategy;
+    }
+
+    public String getText(){
+        return text;
+    }
+
+    public void add(int index, TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
+    }
+
+    public TextElement get(int index) {
+        throw new UnsupportedOperationException("You cannot do that");
+    }
+
+    public void remove(TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
+    }
 }

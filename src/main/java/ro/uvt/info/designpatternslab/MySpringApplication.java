@@ -3,28 +3,16 @@ package ro.uvt.info.designpatternslab;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
-import ro.uvt.info.designpatternslab.difexemple.ClientComponent;
-import ro.uvt.info.designpatternslab.difexemple.SingletonComponent;
-import ro.uvt.info.designpatternslab.difexemple.TransientComponent;
+import ro.uvt.info.designpatternslab.difexemple.*;
+
 
 @SpringBootApplication
-
 public class MySpringApplication {
+
     public static void main(String[] args) {
-//
-// Run this main function and inspect the output console
-// to learn about
-// the lifecycle of objects within
-// Spring Dependency Injection Context
-//
-// Gets a handle of dependency injection context
-        ApplicationContext context =
-                SpringApplication.run(MySpringApplication.class, args);
+        ApplicationContext context = SpringApplication.run(MySpringApplication.class, args);
 // Gets an instance of TransientComponent from the DI context
-        TransientComponent transientBean =
-                context.getBean(TransientComponent.class);
+        TransientComponent transientBean = context.getBean(TransientComponent.class);
         transientBean.operation();
 // Note that every time an instance is required,
 // the DI context creates a new one
@@ -34,8 +22,7 @@ public class MySpringApplication {
 // Note that the unique instance was created while
 // application was loaded, before creating
 // the transient instances
-        SingletonComponent singletonBean =
-                context.getBean(SingletonComponent.class);
+        SingletonComponent singletonBean = context.getBean(SingletonComponent.class);
         singletonBean.operation();
 // Note that every time an instance is required,
 // the DI returns the same unique one

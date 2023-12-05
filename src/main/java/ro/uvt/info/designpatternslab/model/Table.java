@@ -1,35 +1,26 @@
 package ro.uvt.info.designpatternslab.model;
 
-import lombok.Data;
+public class Table implements TextElement, Visitee {
+    private String title;
 
-import lombok.Data;
-import ro.uvt.info.designpatternslab.services.Visitor;
-
-@Data
-public class Table implements Element{
-    private String something;
-
-    public Table(String something) {
-        this.something = something;
+    public Table(String title) {
+        this.title = title;
     }
 
-    public void print() {
-        System.out.println("Something: " + something);
+    public String getTitle() {
+        return title;
     }
 
-    @Override
-    public void add(Element element) {
-
+    public void add(int index, TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
-    @Override
-    public void remove(Element element) {
-
+    public TextElement get(int index) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
-    @Override
-    public Element get(int id) {
-        return null;
+    public void remove(TextElement element) {
+        throw new UnsupportedOperationException("You cannot do that");
     }
 
     @Override

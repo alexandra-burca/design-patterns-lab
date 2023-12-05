@@ -1,34 +1,47 @@
 package ro.uvt.info.designpatternslab.difexemple.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ro.uvt.info.designpatternslab.model.*;
-import ro.uvt.info.designpatternslab.services.BookStatisticsVisitor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import ro.uvt.info.designpatternslab.model.Book;
+import ro.uvt.info.designpatternslab.services.BookService;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/books")
-public class BookController {
-    @GetMapping("/statistics")
-    public ResponseEntity<?> printStatistics() {
-        Section cap1 = new Section("Capitolul 1");
-        Paragraph p1 = new Paragraph("Paragraph 1");
-        cap1.add(p1);
-        Paragraph p2 = new Paragraph("Paragraph 2");
-        cap1.add(p2);
-        Paragraph p3 = new Paragraph("Paragraph 3");
-        cap1.add(p3);
-        Paragraph p4 = new Paragraph("Paragraph 4");
-        cap1.add(p4);
-        cap1.add(new ImageProxy("ImageOne"));
-        cap1.add(new Image("ImageTwo"));
-        cap1.add(new Paragraph("Some text"));
-        cap1.add(new Table("Table 1"));
-        BookStatisticsVisitor stats = new BookStatisticsVisitor();
-        cap1.accept(stats);
-        stats.printStatistics();
-        return new ResponseEntity<>("", HttpStatus.OK);
+public class    BookController {
+
+    private final BookService bookService;
+
+    @Autowired
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @GetMapping
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
+    }
+
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable Long id) {
+        return bookService.getBookById(id);
+    }
+
+    @PostMapping
+    public void createBook(@RequestBody Book book) {
+        bookService.createBook((Book) book);
+    }
+
+    @PutMapping("/{id}")
+    public void updateBook(@PathVariable Long id, @RequestBody Book book) {
+        bookService.updateBook(id, book);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
     }
 }

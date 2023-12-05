@@ -1,24 +1,32 @@
 package ro.uvt.info.designpatternslab.difexemple.controllers;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ro.uvt.info.designpatternslab.difexemple.ClientComponent;
+import org.springframework.context.ApplicationContext;
+import ro.uvt.info.designpatternslab.difexemple.*;
+
 
 @RestController
 @RequestMapping("/")
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class HelloController {
-    private final ClientComponent clientComponent;
+    private final ClientComponent component;
+    private final ApplicationContext applicationContext;
 
-    @Autowired
-    public HelloController(ClientComponent clientComponent) {
-        this.clientComponent = clientComponent;
+    @GetMapping("/")
+    public String hello() {
+        return "Hello from Spring Boot";
     }
 
-    @GetMapping
-    public String sayHello() {
-        return clientComponent.getClientMessage();
+    @GetMapping("/client")
+    public String helloClient() {
+        TransientComponent transientComponent = applicationContext.getBean(TransientComponent.class);
+        SingletonComponent singletonComponent = applicationContext.getBean(SingletonComponent.class);
+
+        return "Hello from " + component.toString();
     }
 }

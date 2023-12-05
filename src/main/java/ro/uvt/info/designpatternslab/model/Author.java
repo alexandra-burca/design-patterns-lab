@@ -1,16 +1,17 @@
 package ro.uvt.info.designpatternslab.model;
 
-    public class Author {
-        private String name;
-        private String surname;
 
-        public Author(String name, String surname) {
-            this.name = name;
-            this.surname=surname;
-        }
+import com.fasterxml.jackson.annotation.JsonCreator;
 
-        public void print() {
+public class Author {
+    private String name;
 
-            System.out.println("Name: " + name + ", surname: " + surname);
-        }
+    @JsonCreator
+    public Author(String name) {
+        this.name = name;
     }
+
+    public void print() {
+        System.out.println("Author: " + name);
+    }
+}
