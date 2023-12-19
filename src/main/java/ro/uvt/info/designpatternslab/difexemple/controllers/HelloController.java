@@ -1,32 +1,52 @@
 package ro.uvt.info.designpatternslab.difexemple.controllers;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import ro.uvt.info.designpatternslab.model.*;
+import ro.uvt.info.designpatternslab.services.*;
 import ro.uvt.info.designpatternslab.difexemple.*;
+import ro.uvt.info.designpatternslab.difexemple.commands.*;
 
-
-@RestController
-@RequestMapping("/")
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+//@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@Controller
 public class HelloController {
-    private final ClientComponent component;
-    private final ApplicationContext applicationContext;
+    private final TransientComponent transientComponent;
+    private final ClientComponent clientComponent1;
+    private final ClientComponent clientComponent2;
 
-    @GetMapping("/")
+    public HelloController(@Qualifier("clientComponent1") ClientComponent clientComponent1, @Qualifier("clientComponent2") ClientComponent clientComponent2, TransientComponent transientComponent) {
+        this.clientComponent1 = clientComponent1;
+        this.clientComponent2 = clientComponent2;
+        this.transientComponent = transientComponent;
+    }
+    @RequestMapping(value = "")
+    @ResponseBody
     public String hello() {
-        return "Hello from Spring Boot";
+        return "Hello From Spring Boot!";
     }
 
-    @GetMapping("/client")
-    public String helloClient() {
-        TransientComponent transientComponent = applicationContext.getBean(TransientComponent.class);
-        SingletonComponent singletonComponent = applicationContext.getBean(SingletonComponent.class);
+    @GetMapping("/hello")
+    @ResponseBody
+    public void helloComponent() {
+        System.out.println("Hello: ");
+        this.transientComponent.operation();
+    }
 
-        return "Hello from " + component.toString();
+    @GetMapping("/client1")
+    @ResponseBody
+    public void helloClient() {
+        System.out.println("ClientComponent1 :");
+        this.clientComponent1.operation();
+    }
+
+    @GetMapping("/client2")
+    @ResponseBody
+    public void helloClient2() {
+        System.out.println("ClientComponent2 :");
+        this.clientComponent2.operation();
     }
 }

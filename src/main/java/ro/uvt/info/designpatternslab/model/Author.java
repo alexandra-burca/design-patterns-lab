@@ -1,17 +1,19 @@
 package ro.uvt.info.designpatternslab.model;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Author {
+    @Getter
+    @Setter
     private String name;
 
-    @JsonCreator
-    public Author(String name) {
+    public Author (String name) {
         this.name = name;
     }
 
     public void print() {
-        System.out.println("Author: " + name);
+        System.out.println("Author: " + this.name);
     }
 }

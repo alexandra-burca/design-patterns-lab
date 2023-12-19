@@ -1,6 +1,8 @@
 package ro.uvt.info.designpatternslab.model;
 
 
+import java.io.IOException;
+
 public interface Visitee {
-    void accept(Visitor v);
+    public void accept(Visitor visitor) throws IOException;
 }

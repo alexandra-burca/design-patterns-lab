@@ -1,30 +1,50 @@
 package ro.uvt.info.designpatternslab.model;
 
-public class Table implements TextElement, Visitee {
+import lombok.Getter;
+import lombok.Setter;
+
+public class Table implements Element, Visitee{
+    @Getter
+    @Setter
     private String title;
+    private Element parent;
 
     public Table(String title) {
         this.title = title;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void add(int index, TextElement element) {
-        throw new UnsupportedOperationException("You cannot do that");
-    }
-
-    public TextElement get(int index) {
-        throw new UnsupportedOperationException("You cannot do that");
-    }
-
-    public void remove(TextElement element) {
-        throw new UnsupportedOperationException("You cannot do that");
+    @Override
+    public void add(Element element) throws Exception {
+        throw new Exception("You cannot add an element to a node element!");
     }
 
     @Override
-    public void accept(Visitor v) {
-        v.visitTable(this);
+    public void remove(Element element) throws Exception {
+        throw new Exception("You cannot remove an element from a leaf node!");
+    }
+
+    @Override
+    public Element get(int index) throws Exception {
+        throw new Exception("You cannot extract an element from a leaf node!");
+    }
+
+    @Override
+    public void setParent(Element parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public Element getParent() {
+        return this.parent;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitTable(this);
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Table: " + this.title);
     }
 }

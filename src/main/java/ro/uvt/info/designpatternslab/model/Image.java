@@ -1,13 +1,27 @@
 package ro.uvt.info.designpatternslab.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
+import ro.uvt.info.designpatternslab.services.ImageLoaderFactory;
+
+import java.awt.*;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+@Setter
+@Getter
 
-public class Image implements TextElement, Picture, Visitee {
-    private String name;
+public class Image implements Element, Picture, Visitee{
+    private String content;
+    private String url;
+    private Element parent;
+    private Dimension dim;
 
-    public Image(String name) {
-        this.name = name;
+    public Image(String content) {
+        this.content = content;
+        this.url = "";
+        this.dim = new Dimension(0,0);
+        //new ImageLoaderFactory().createImageLoader();
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
@@ -15,29 +29,63 @@ public class Image implements TextElement, Picture, Visitee {
         }
     }
 
-    public String getName() {
-        return name;
+    public Image (String content, String url, Dimension dim) throws IOException {
+        this.content = content;
+        this.url = url;
+        new ImageLoaderFactory().createImageLoader(url);
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void add(int index, TextElement element) {
-        throw new UnsupportedOperationException("You cannot do that");
+    @Override
+    public void add(Element element) throws Exception {
+        throw new Exception("You cannot add an element to a node element!");
     }
 
-    public TextElement get(int index) {
-        throw new UnsupportedOperationException("You cannot do that");
+    @Override
+    public void remove(Element element) throws Exception {
+        throw new Exception("You cannot remove an element from a leaf node!");
     }
 
-    public void remove(TextElement element) {
-        throw new UnsupportedOperationException("You cannot do that");
+    @Override
+    public Element get(int index) throws Exception {
+        throw new Exception("You cannot extract an element from a leaf node!");
+    }
+
+    @Override
+    public void setParent(Element parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public Element getParent() {
+        return this.parent;
     }
 
     @Override
     public String url() {
-        throw new UnsupportedOperationException("You cannot do that");
+        return this.url;
     }
 
     @Override
-    public void accept(Visitor v) {
-        v.visitImage(this);
+    public Dimension dim() {
+        return this.dim;
+    }
+
+    @Override
+    public String content() {
+        return this.content;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitImage(this);
+    }
+    @Override
+    public void print() {
+        System.out.println("Image with name: " + this.url + "\n" + "Content: " + this.content);
     }
 }

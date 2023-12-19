@@ -1,10 +1,14 @@
 package ro.uvt.info.designpatternslab.model;
 
 
-public interface Visitor {
-    void visitParagraph(Paragraph p);
-    void visitSection(Section s);
-    void visitImage(Image i);
-    void visitTable(Table t);
-    void visitBook(Book b);
+import java.io.IOException;
+
+public interface Visitor<T> {
+    public T visitBook(Book book);
+    public T visitSection(Section section);
+    public T visitTableOfContents(TableOfContents tableOfContents);
+    public T visitParagraph(Paragraph paragraph);
+    public T visitImageProxy(ImageProxy imageProxy) throws IOException;
+    public T visitImage(Image image);
+    public T visitTable(Table table);
 }

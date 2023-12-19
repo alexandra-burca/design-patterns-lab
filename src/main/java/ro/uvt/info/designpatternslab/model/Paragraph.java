@@ -1,10 +1,15 @@
 package ro.uvt.info.designpatternslab.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import ro.uvt.info.designpatternslab.services.*;
 
-public class Paragraph implements TextElement, Visitee {
+public class Paragraph implements Element, Visitee{
+    @Getter
+    @Setter
     private String text;
+    private Element parent;
     private AlignStrategy alignStrategy;
 
     public Paragraph(String text) {
@@ -13,31 +18,41 @@ public class Paragraph implements TextElement, Visitee {
     }
 
     @Override
-    public void accept(Visitor v) {
-        v.visitParagraph(this);
+    public void add(Element element) throws Exception {
+        throw new Exception("You cannot add an element to a node element!");
     }
 
-    public void setAlignStrategy(AlignStrategy strategy) {
-        this.alignStrategy = strategy;
+    @Override
+    public void remove(Element element) throws Exception {
+        throw new Exception("You cannot remove an element from a leaf node!");
     }
 
-    public AlignStrategy getAlignStrategy(){
-        return alignStrategy;
+    @Override
+    public Element get(int index) throws Exception {
+        throw new Exception("You cannot extract an element from a leaf node!");
     }
 
-    public String getText(){
-        return text;
+    @Override
+    public void setParent(Element parent) {
+        this.parent = parent;
     }
 
-    public void add(int index, TextElement element) {
-        throw new UnsupportedOperationException("You cannot do that");
+    @Override
+    public Element getParent() {
+        return this.parent;
     }
 
-    public TextElement get(int index) {
-        throw new UnsupportedOperationException("You cannot do that");
+    public void setAlignStrategy(AlignStrategy alignStrategy) {
+        this.alignStrategy = alignStrategy;
     }
 
-    public void remove(TextElement element) {
-        throw new UnsupportedOperationException("You cannot do that");
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitParagraph(this);
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Paragraph: " + "\n" + alignStrategy.render(this.text));
     }
 }
