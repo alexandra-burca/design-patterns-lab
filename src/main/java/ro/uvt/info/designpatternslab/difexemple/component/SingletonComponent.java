@@ -1,4 +1,4 @@
-package ro.uvt.info.designpatternslab.difexemple;
+package ro.uvt.info.designpatternslab.difexemple.component;
 
 import org.springframework.stereotype.Component;
 

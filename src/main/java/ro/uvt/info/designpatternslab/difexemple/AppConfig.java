@@ -2,6 +2,9 @@ package ro.uvt.info.designpatternslab.difexemple;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ro.uvt.info.designpatternslab.difexemple.component.ClientComponent;
+import ro.uvt.info.designpatternslab.difexemple.component.SingletonComponent;
+import ro.uvt.info.designpatternslab.difexemple.component.TransientComponent;
 
 @Configuration
 public class AppConfig {

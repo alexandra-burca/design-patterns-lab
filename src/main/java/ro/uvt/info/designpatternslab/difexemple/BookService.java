@@ -1,23 +1,42 @@
 package ro.uvt.info.designpatternslab.difexemple;
 
-
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ro.uvt.info.designpatternslab.difexemple.persistence.BooksRepository;
 import ro.uvt.info.designpatternslab.model.Book;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
-@Getter
-@Setter
 public class BookService {
-    private  HashMap<Long, Book> bookList = new HashMap<>();
-    private  long bookId = 0;
 
+    private final BooksRepository booksRepository;
 
+    @Autowired
+    public BookService(BooksRepository booksRepository) {
+        this.booksRepository = booksRepository;
+    }
 
+    public List<Book> getAllBooks() {
+        return booksRepository.findAll();
+    }
+
+    public Book getBookById(Long id) {
+        return booksRepository.findById(id).orElse(null);
+    }
+
+    public void createBook(Book book) {
+        booksRepository.save(book);
+    }
+
+    public void updateBook(Long id, Book updatedBook) {
+        if (booksRepository.existsById(id)) {
+            updatedBook.setId(id);
+            booksRepository.save(updatedBook);
+        }
+    }
+
+    public void deleteBook(Long id) {
+        booksRepository.deleteById(id);
+    }
 }

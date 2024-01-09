@@ -1,15 +1,11 @@
 package ro.uvt.info.designpatternslab.difexemple.controllers;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import ro.uvt.info.designpatternslab.model.*;
-import ro.uvt.info.designpatternslab.services.*;
-import ro.uvt.info.designpatternslab.difexemple.*;
-import ro.uvt.info.designpatternslab.difexemple.commands.*;
+import ro.uvt.info.designpatternslab.difexemple.component.ClientComponent;
+import ro.uvt.info.designpatternslab.difexemple.component.TransientComponent;
 
 //@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Controller

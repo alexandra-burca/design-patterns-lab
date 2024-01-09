@@ -1,9 +1,9 @@
-package ro.uvt.info.designpatternslab.difexemple;
+package ro.uvt.info.designpatternslab.difexemple.component;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import ro.uvt.info.designpatternslab.difexemple.component.SingletonComponent;
+import ro.uvt.info.designpatternslab.difexemple.component.TransientComponent;
 
 @Component
 public class ClientComponent {

@@ -8,6 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import ro.uvt.info.designpatternslab.difexemple.component.ClientComponent;
+import ro.uvt.info.designpatternslab.difexemple.component.SingletonComponent;
+import ro.uvt.info.designpatternslab.difexemple.component.TransientComponent;
 
 @SpringBootApplication
 @Configuration
