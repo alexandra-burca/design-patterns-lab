@@ -1,3 +1,3 @@
-# SPLab-AlexandraBurca
+# Design Patterns Lab
 
-hello :)
+Project for my univeristy design patterns course.
